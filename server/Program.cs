@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-var builder = WebApplication.CreateBuilder(args); builder.Services.AddOpenApi();
-var app = builder.Build(); app.MapOpenApi();
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
 var transactions = new List<Transaction>();
 app.MapGet("/api/summary", () => {
     var expenses = transactions.Where(x => x.Kind == "expense").Sum(x => x.Amount);
@@ -13,4 +13,3 @@ app.MapPost("/api/transactions", (CreateTransaction request) => {
 }); app.Run();
 record Transaction(Guid Id,string Description,string Category,string Kind,decimal Amount,DateOnly PostedOn);
 record CreateTransaction([property:Required,StringLength(80)]string Description,[property:Required,StringLength(30)]string Category,[property:RegularExpression("^(income|expense)$")]string Kind,[property:Range(0.01,1000000)]decimal Amount);
-

@@ -54,7 +54,7 @@ curl -X POST http://localhost:8080/api/transactions \
 docker compose up --build
 ```
 
-API docs are available from the .NET OpenAPI endpoint. The React client can also be run directly from `client/` during development.
+The API is available at `http://localhost:8080`. The React client can also be run directly from `client/` during development.
 
 ## Suggested demo flow
 
